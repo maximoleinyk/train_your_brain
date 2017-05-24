@@ -20,9 +20,11 @@ public class RedBlackTree implements Printable {
         if (this.root == null) {
             return true;
         }
+
         Stack<Node> stack = new Stack<>();
         stack.push(this.root);
         List<Integer> numberOfBlackNodesInEachPath = new LinkedList<>();
+
         while (!stack.isEmpty()) {
             Node n = stack.pop();
 
@@ -39,12 +41,12 @@ public class RedBlackTree implements Printable {
             }
         }
 
-        Integer[] objects = new Integer[numberOfBlackNodesInEachPath.size()];
-        numberOfBlackNodesInEachPath.toArray(objects);
+        Integer[] paths = new Integer[numberOfBlackNodesInEachPath.size()];
+        numberOfBlackNodesInEachPath.toArray(paths);
 
-        for (int k = 0; k < objects.length - 1; k++) {
-            int blackCountFirst = objects[k];
-            int blackCountSecond = objects[k + 1];
+        for (int k = 0; k < paths.length - 1; k++) {
+            int blackCountFirst = paths[k];
+            int blackCountSecond = paths[k + 1];
 
             if (blackCountFirst != blackCountSecond) {
                 return false;
@@ -108,7 +110,7 @@ public class RedBlackTree implements Printable {
             }
         }
 
-        if (z.isRed() && z.parent == null) {
+        if (z.isRed() && z.isRoot()) {
             z.color = BLACK;
         }
 
@@ -128,10 +130,6 @@ public class RedBlackTree implements Printable {
 
         boolean result = this.deleteNode(n);
 
-        if (!this.isValid()) {
-            return false;
-        }
-
         this.size--;
 
         return result;
@@ -143,7 +141,6 @@ public class RedBlackTree implements Printable {
             n.value = inOrderSuccessor.value;
             return this.deleteNode(inOrderSuccessor);
         }
-
         return this.deleteOneOrZero(n);
     }
 
@@ -152,7 +149,7 @@ public class RedBlackTree implements Printable {
 
         // delete leaf
         if (n.isRed()) {
-            if (n.parent.left == n) {
+            if (n.isLeftNode()) {
                 n.parent.left = null;
             } else {
                 n.parent.right = null;
