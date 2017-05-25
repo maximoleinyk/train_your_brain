@@ -91,7 +91,7 @@ public class RedBlackTree implements Printable {
                     this.colorLeftUncle(z);
                     z = z.parent.parent;
                 }
-            } else if (z.isTriangleLeft()) {
+            } else if (z.isTriangleRight()) {
                 if (z.isLeftUncleBlack()) {
                     this.rotateRight(z);
                     z = z.right;
@@ -99,7 +99,7 @@ public class RedBlackTree implements Printable {
                     this.colorLeftUncle(z);
                     z = z.parent.parent;
                 }
-            } else if (z.isTriangleRight()) {
+            } else if (z.isTriangleLeft()) {
                 if (z.isRightUncleBlack()) {
                     this.rotateLeft(z);
                     z = z.left;
@@ -494,11 +494,11 @@ public class RedBlackTree implements Printable {
             return this.parent.parent.left == null || this.parent.parent.left.isBlack();
         }
 
-        boolean isTriangleRight() {
+        boolean isTriangleLeft() {
             return this.isRightNode() && this.parent.parent.left == this.parent;
         }
 
-        boolean isTriangleLeft() {
+        boolean isTriangleRight() {
             return this.isLeftNode() && this.parent.parent.right == this.parent;
         }
 

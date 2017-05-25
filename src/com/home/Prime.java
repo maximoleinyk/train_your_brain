@@ -3,9 +3,6 @@ package com.home;
 import java.util.Arrays;
 import java.util.Stack;
 
-/**
- * Created by moliinyk on 24/05/2017.
- */
 public class Prime {
     public static boolean isPrime(int number) {
         if (number < 2) {
@@ -23,9 +20,9 @@ public class Prime {
 
     public static void main(String[] args) {
         Stack<Integer> results = new Stack<>();
-        int number = 1;
+        int number = 2;
 
-        while (results.size() <= 100) {
+        while (results.size() != 10) {
             if (isPrime(number)) {
                 results.push(number);
             }
