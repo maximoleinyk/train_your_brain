@@ -14,10 +14,7 @@ public class LinkedList implements Printable {
     private Entry head;
 
     public boolean hasLoop(LinkedList list) {
-        if (list.head == null) {
-            return false;
-        }
-        if (list.head.next == null) {
+        if (list.head == null || list.head.next == null) {
             return false;
         }
 
@@ -25,21 +22,17 @@ public class LinkedList implements Printable {
         Entry fast = list.head.next;
 
         while (slow.next != null) {
-            // slow and fast met each other
             if (slow == fast) {
                 return true;
             }
 
             slow = slow.next;
 
-            if (fast.next != null) {
-                fast = fast.next.next;
-            }
-
-            // fastest found the end
-            if (fast == null) {
+            if (fast == null || fast.next == null) {
                 return false;
             }
+
+            fast = fast.next.next;
         }
 
         return false;
