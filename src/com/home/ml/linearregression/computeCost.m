@@ -1,0 +1,1 @@
+function cost = computeCost(x, y, theta)  m = length(x);  hypothesis = x * theta;  errors = (hypothesis .- y).^2;  cost = 1/(2*m) * sum(errors);end;

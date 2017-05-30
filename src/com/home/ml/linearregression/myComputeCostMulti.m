@@ -1,0 +1,1 @@
+function J = computeCostMulti(x, y, theta)  m = length(x);  hypothesis = x * theta;  errors = (hypothesis .- y).^2;  J = 1/(2*m) * sum(errors);end

@@ -1,0 +1,1 @@
+function g = sigmoid(z)  g = zeros(size(z)); % vector of size "m"  g = 1 / (1 + e.^-z);end;

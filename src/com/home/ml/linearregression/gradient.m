@@ -1,0 +1,1 @@
+function [theta, history] = gradient(x, y, theta, learning_rate, iterations)  m = length(y);  history = zeros(iterations, 1);    for i = 1:iterations    hypothesis = x * theta;    sum = (hypothesis .- y)' * x;    newDecrement = learning_rate * (1/m) * sum;    theta = theta - newDecrement';    history(i) = computeCost(x, y, theta);  endend

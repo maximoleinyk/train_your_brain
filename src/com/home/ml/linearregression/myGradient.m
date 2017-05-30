@@ -1,0 +1,1 @@
+function [theta, J_history] = gradient(x, y, theta, alpha, iterations)  m = length(y);  J_history = zeros(iterations, 1);    for i = 1:iterations    hypothesis = x * theta;    errors = hypothesis .- y;    newDecrement = alpha * (1/m) * errors' * x;    theta = theta - newDecrement';    J_history(i) = computeCostMulti(x, y, theta);  endend
