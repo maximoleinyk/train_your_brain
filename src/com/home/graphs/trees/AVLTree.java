@@ -2,7 +2,7 @@ package com.home.graphs.trees;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class AVLTree {
+public class AVLTree extends BinaryTree {
 
     private static final class Node {
         int value;
@@ -177,7 +177,7 @@ public class AVLTree {
     }
 
     private Node removeNode(Node node) {
-        if (node == null) {
+        if (node == null || this.root == null) {
             return null;
         }
 
@@ -187,6 +187,7 @@ public class AVLTree {
             nodeToBeDeleted = getPredecessor(node);
         }
 
+        // root has no children
         if (nodeToBeDeleted.isRoot()) {
             this.root = null;
             return null;

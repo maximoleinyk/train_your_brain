@@ -1,12 +1,11 @@
 package com.home.graphs.trees;
 
-import com.home.Printable;
-
-import java.util.*;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class RedBlackTree implements Printable {
+public class RedBlackTree extends BinaryTree {
 
     private static final boolean RED = false;
     private static final boolean BLACK = true;
@@ -442,21 +441,6 @@ public class RedBlackTree implements Printable {
         }
 
         return node;
-    }
-
-    public void print() {
-        this.print(this.root, true);
-        System.out.println("");
-    }
-
-    private void print(Node node, boolean isLeft) {
-        if (node == null) {
-            return;
-        }
-
-        this.print(node.left, true);
-        System.out.print((isLeft ? "left " : "right ") + node.value + " ");
-        this.print(node.right, false);
     }
 
     private static class Node {
