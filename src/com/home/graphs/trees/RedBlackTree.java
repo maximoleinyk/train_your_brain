@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class RedBlackTree extends BinaryTree {
+public class RedBlackTree {
 
     private static final boolean RED = false;
     private static final boolean BLACK = true;
@@ -284,17 +284,6 @@ public class RedBlackTree extends BinaryTree {
         return true;
     }
 
-    private Node getInorderSuccessor(Node node) {
-        if (node == null) {
-            return null;
-        }
-
-        Node successor = this.getSuccessor(node);
-        Node predecessor = this.getPredecessor(node);
-
-        return successor != null ? successor : predecessor;
-    }
-
     private Node insertNode(int value) {
         if (this.root == null) {
             this.root = new Node(value, BLACK);
@@ -405,6 +394,17 @@ public class RedBlackTree extends BinaryTree {
                 return node;
             }
         }
+    }
+
+    private Node getInorderSuccessor(Node node) {
+        if (node == null) {
+            return null;
+        }
+
+        Node successor = this.getSuccessor(node);
+        Node predecessor = this.getPredecessor(node);
+
+        return successor != null ? successor : predecessor;
     }
 
     private Node getSuccessor(Node node) {

@@ -2,7 +2,7 @@ package com.home.graphs.trees;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class AVLTree extends BinaryTree {
+public class AVLTree {
 
     private static final class Node {
         int value;
@@ -23,39 +23,39 @@ public class AVLTree extends BinaryTree {
             return Integer.toString(this.value);
         }
 
-        public boolean isLeftLeft() {
+        boolean isLeftLeft() {
             return this.parent != null && this.parent.left == this && this.parent.parent != null && this.parent.parent.left == this.parent;
         }
 
-        public boolean isRightRight() {
+        boolean isRightRight() {
             return this.parent != null && this.parent.right == this && this.parent.parent != null && this.parent.parent.right == this.parent;
         }
 
-        public boolean hasRightRight() {
+        boolean hasRightRight() {
             return this.right != null && this.right.right != null;
         }
 
-        public boolean hasRightLeft() {
+        boolean hasRightLeft() {
             return this.right != null && this.right.left != null;
         }
 
-        public boolean hasLeftLeft() {
+        boolean hasLeftLeft() {
             return this.left != null && this.left.left != null;
         }
 
-        public boolean hasLeftRight() {
+        boolean hasLeftRight() {
             return this.left != null && this.left.right != null;
         }
 
-        public boolean isRoot() {
+        boolean isRoot() {
             return this.parent == null;
         }
 
-        public boolean isLeftRight() {
+        boolean isLeftRight() {
             return this.parent != null && this.parent.right == this && this.parent.parent != null && this.parent.parent.left == this.parent;
         }
 
-        public boolean isRightLeft() {
+        boolean isRightLeft() {
             return this.parent != null && this.parent.left == this && this.parent.parent != null && this.parent.parent.right == this.parent;
         }
     }
@@ -94,7 +94,7 @@ public class AVLTree extends BinaryTree {
             return false;
         }
 
-        Node foundNode = this.findNode(value);
+        Node foundNode = this.find(value);
 
         if (foundNode == null) {
             return false;
@@ -136,7 +136,7 @@ public class AVLTree extends BinaryTree {
         return true;
     }
 
-    private Node findNode(int value) {
+    public Node find(int value) {
         if (this.root == null) {
             return null;
         }
