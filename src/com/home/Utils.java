@@ -3,6 +3,15 @@ package com.home;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Utils {
+    public int getKthSmallest(int[] array, int k) {
+        if (array == null || k >= array.length) {
+            return -1;
+        }
+
+
+        return -1;
+    }
+
     public int[] getPrimeNumbers(int total) {
         int[] result = new int[total];
         int i = 0;

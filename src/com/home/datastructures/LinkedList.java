@@ -1,4 +1,6 @@
-package com.home;
+package com.home.datastructures;
+
+import com.home.Printable;
 
 public class LinkedList implements Printable {
 
@@ -13,29 +15,44 @@ public class LinkedList implements Printable {
 
     private Entry head;
 
-    public boolean hasLoop(LinkedList list) {
-        if (list.head == null || list.head.next == null) {
+    public boolean detectAndRemove() {
+        if (head == null || head.next == null) {
             return false;
         }
 
-        Entry slow = list.head;
-        Entry fast = list.head.next;
+        Entry slow = head;
+        Entry fast = head;
 
-        while (slow.next != null) {
+        while (slow != null && fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+
             if (slow == fast) {
+                removeLoop(slow, head);
                 return true;
             }
-
-            slow = slow.next;
-
-            if (fast == null || fast.next == null) {
-                return false;
-            }
-
-            fast = fast.next.next;
         }
 
         return false;
+    }
+
+    private void removeLoop(Entry slow, Entry head) {
+        Entry pointer1 = head;
+        Entry pointer2 = slow;
+
+        while (true) {
+            while (pointer2.next != slow) {
+                if (pointer2.next == pointer1) {
+                    pointer2.next = null;
+                    return;
+                }
+
+                pointer2 = pointer2.next;
+            }
+
+            pointer2 = slow;
+            pointer1 = pointer1.next;
+        }
     }
 
     public void add(int i) {
@@ -60,7 +77,7 @@ public class LinkedList implements Printable {
             current = current.next;
         }
 
-        current.next = head;
+        current.next = head.next;
     }
 
     public void reverse() {
@@ -71,7 +88,7 @@ public class LinkedList implements Printable {
         Entry prev = null;
         Entry current = head;
 
-        while(current.next != null) {
+        while (current.next != null) {
             Entry n = current.next;
             current.next = prev;
             prev = current;
@@ -103,9 +120,10 @@ public class LinkedList implements Printable {
         list.add(3);
         list.add(4);
         list.add(5);
+        list.add(6);
+        list.add(7);
 
-        System.out.println("List does not contain infinite loop: " + list.hasLoop(list));
         list.addLoop();
-        System.out.println("List contains infinite loop: " + list.hasLoop(list));
+        list.detectAndRemove();
     }
 }
