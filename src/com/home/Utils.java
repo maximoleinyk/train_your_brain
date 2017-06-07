@@ -3,13 +3,53 @@ package com.home;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Utils {
-    public int getKthSmallest(int[] array, int k) {
+    public static int getKthSmallest(int[] array, int k) {
         if (array == null || k >= array.length) {
-            return -1;
+            return Integer.MAX_VALUE;
         }
 
+        int result = quickSelect(array, 0, array.length - 1, k);
 
-        return -1;
+        if (result == Integer.MAX_VALUE) {
+            return array[k - 1];
+        }
+
+        return result;
+    }
+
+    private static int quickSelect(int[] array, int l, int h, int k) {
+        if (l >= h) {
+            return Integer.MAX_VALUE;
+        }
+
+        int lo = l;
+        int hi = h;
+        int pivotIndex = l;
+        int pivot = array[pivotIndex];
+
+        swap(array, pivotIndex, hi);
+        while (lo < hi) {
+            if (array[lo] > pivot) {
+                while (hi > lo) {
+                    if (array[hi] < pivot) {
+                        swap(array, lo, hi);
+                        break;
+                    }
+                    hi--;
+                }
+            }
+            lo++;
+        }
+        swap(array, hi, h);
+
+        if (k == hi + 1) {
+            return array[hi];
+        }
+
+        int leftValue = quickSelect(array, l, lo - 1, k);
+        int rightValue = quickSelect(array, lo, h, k);
+
+        return leftValue == Integer.MAX_VALUE ? rightValue : leftValue;
     }
 
     public int[] getPrimeNumbers(int total) {
