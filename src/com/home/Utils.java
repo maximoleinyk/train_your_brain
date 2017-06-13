@@ -3,6 +3,34 @@ package com.home;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Utils {
+    public static void main(String[] args) {
+        System.out.println(rotateBitsRight(32, 8, 4));
+    }
+
+    public static int rotateBitsLeft(final int bits, int n, int times) {
+        return (n << times) | (n >> (bits - times));
+    }
+
+    public static int rotateBitsRight(final int bits, int n, int times) {
+        return (n >> times) | (n << (bits - times));
+    }
+
+    public static int sumBitDifferences(int[] array) {
+        int result = 0;
+
+        for (int i = 0; i < 32; i++) {
+            int count = 0;
+            for (int j = 0; j < array.length; j++) {
+                if ((array[j] & (1 << i)) > 0) {
+                    count++;
+                }
+            }
+            result += (count * (array.length - count) * 2);
+        }
+
+        return result;
+    }
+
     public static int getKthSmallest(int[] array, int k) {
         if (array == null || k >= array.length) {
             return Integer.MAX_VALUE;
